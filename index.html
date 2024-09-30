@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Random Dice Roll</title>
+    <style>
+        .dice-container {
+            text-align: center;
+            margin-top: 50px;
+        }
+        .dice-image {
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="dice-container">
+        <img src="images/dice1.png" class="dice-image" id="dice-image"><br>
+        <button onclick="rollDice()">Roll Dice</button>
+    </div>
+
+    <script>
+        function rollDice() {
+            // Make an AJAX request to the Node.js server
+            fetch('/roll')
+                .then(response => response.blob())
+                .then(blob => {
+                    const url = URL.createObjectURL(blob);
+                    document.getElementById('dice-image').src = url;
+                });
+        }
+    </script>
+</body>
+</html>
